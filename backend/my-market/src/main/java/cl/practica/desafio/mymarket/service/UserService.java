@@ -23,10 +23,16 @@ public class UserService {
 
         userRepository.findAll().forEach(userEntity -> resultado.add(
                 UserDTO.builder()
-                        .name(userEntity.getName())
-                        .idRol(userEntity.getRol())
                         .dni(userEntity.getDni())
+                        .username(userEntity.getUsername())
+                        .password(userEntity.getPassword())
+                        .name(userEntity.getName())
+                        .lastname(userEntity.getLastname())
                         .address(userEntity.getAddress())
+                        .phone(userEntity.getPhone())
+                        .mail(userEntity.getMail())
+                        .birth(userEntity.getBirth())
+                        .idRole(userEntity.getRole())
                         .build()
                 )
         );
@@ -39,22 +45,53 @@ public class UserService {
 
         UserEntity userEntity = new UserEntity();
         userEntity.setDni(user.getDni());
+        userEntity.setUsername(user.getUsername());
+        userEntity.setPassword(user.getPassword());
         userEntity.setName(user.getName());
-        userEntity.setRol(user.getIdRol());
+        userEntity.setLastname(user.getLastname());
         userEntity.setAddress(user.getAddress());
+        userEntity.setPhone(user.getPhone());
+        userEntity.setMail(user.getMail());
+        userEntity.setBirth(user.getBirth());
+        userEntity.setRole(user.getIdRole());
 
         userRepository.save(userEntity);
-        return "usuario insertado";
+        return "Usuario insertado";
     }
 
     public String updateUser(UserDTO user) {
-        //TODO : implementar esta seccion
-        return null;
+
+       if (userRepository.findById(user.getDni()).isPresent()){
+           UserEntity userEntity = new UserEntity();
+           userEntity.setDni(user.getDni());
+           userEntity.setUsername(user.getUsername());
+           userEntity.setPassword(user.getPassword());
+           userEntity.setName(user.getName());
+           userEntity.setLastname(user.getLastname());
+           userEntity.setAddress(user.getAddress());
+           userEntity.setPhone(user.getPhone());
+           userEntity.setMail(user.getMail());
+           userEntity.setBirth(user.getBirth());
+           userEntity.setRole(user.getIdRole());
+
+           userRepository.save(userEntity);
+           return "Usuario actualizado";
+       }
+       else{
+           return "No se ha encontrado el usuario";
+       }
+
     }
 
     public String deleteUser(String dni) {
-        //TODO : implementar esta seccion
-        return null;
+        if (userRepository.findById(dni).isPresent()){
+            userRepository.deleteById(dni);
+            return "Usuario eliminado";
+        }
+        else{
+            return "No se ha encontrado el usuario";
+        }
+
     }
 }
 
