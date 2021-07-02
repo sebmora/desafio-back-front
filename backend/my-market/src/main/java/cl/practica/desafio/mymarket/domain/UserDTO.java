@@ -19,5 +19,5 @@ public class UserDTO {
     private Date birth;
     private int idRole;
 
-    
+
 }

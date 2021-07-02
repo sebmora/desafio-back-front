@@ -2,10 +2,8 @@ package cl.practica.desafio.mymarket.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,4 +25,9 @@ public class ProductEntity {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "productEntity")
+    private List<ReviewEntity> reviewList;
+
 }
+
