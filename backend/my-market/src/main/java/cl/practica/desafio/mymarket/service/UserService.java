@@ -1,9 +1,10 @@
 package cl.practica.desafio.mymarket.service;
-
-
+// LOS SERVICES PERTENECEN AL PATRON DE DISENO FACADE
 import cl.practica.desafio.mymarket.database.UserRepository;
+import cl.practica.desafio.mymarket.domain.RoleDTO;
 import cl.practica.desafio.mymarket.domain.UserDTO;
 import cl.practica.desafio.mymarket.entity.UserEntity;
+import cl.practica.desafio.mymarket.entity.RoleEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,25 +22,42 @@ public class UserService {
     public List<UserDTO> getUser() {
         List<UserDTO> resultado = new ArrayList<>();
 
-        userRepository.findAll().forEach(userEntity -> resultado.add(
-                UserDTO.builder()
-                        .dni(userEntity.getDni())
-                        .username(userEntity.getUsername())
-                        .password(userEntity.getPassword())
-                        .name(userEntity.getName())
-                        .lastname(userEntity.getLastname())
-                        .address(userEntity.getAddress())
-                        .phone(userEntity.getPhone())
-                        .mail(userEntity.getMail())
-                        .birth(userEntity.getBirth())
-                        .idRole(userEntity.getRole())
-                        .build()
-                )
+        userRepository.findAll().forEach(userEntity -> {
+            RoleDTO role = RoleDTO.builder()
+                    .roleId(userEntity.getRoleEntity().getRoleId())
+                    .title(userEntity.getRoleEntity().getTitle())
+                    .description(userEntity.getRoleEntity().getDescription())
+                    .build();
+            resultado.add(
+                            UserDTO.builder()
+                                    .dni(userEntity.getDni())
+                                    .username(userEntity.getUsername())
+                                    .password(userEntity.getPassword())
+                                    .name(userEntity.getName())
+                                    .lastname(userEntity.getLastname())
+                                    .address(userEntity.getAddress())
+                                    .phone(userEntity.getPhone())
+                                    .mail(userEntity.getMail())
+                                    .birth(userEntity.getBirth())
+                                    // Encadenacion de objetos a traves de las fk
+                                    .role(String.valueOf(role.getRoleId()))
+                                    .title(userEntity.getRoleEntity().getTitle())
+                                    .description(userEntity.getRoleEntity().getDescription())
+                                    .build()
+                    );
+                }
         );
         return resultado;
     }
 
     public String createUser(UserDTO user) {
+
+        // Composicion de obj. (Crear un objeto dentro de otro)
+        RoleEntity roleEntity = new RoleEntity();
+        roleEntity.setRoleId(Integer.valueOf(user.getRole()));
+        roleEntity.setTitle(user.getTitle());
+        roleEntity.setDescription(user.getDescription());
+        System.out.println("Datos almacenados del rol " + roleEntity);
 
         log.info("Insertando el dato " + user);
 
@@ -53,7 +71,7 @@ public class UserService {
         userEntity.setPhone(user.getPhone());
         userEntity.setMail(user.getMail());
         userEntity.setBirth(user.getBirth());
-        userEntity.setRole(user.getIdRole());
+        userEntity.setRoleEntity(roleEntity);
 
         userRepository.save(userEntity);
         return "Usuario insertado";
@@ -62,6 +80,12 @@ public class UserService {
     public String updateUser(UserDTO user) {
 
        if (userRepository.findById(user.getDni()).isPresent()){
+
+           RoleEntity roleEntity = new RoleEntity();
+           roleEntity.setRoleId(Integer.valueOf(user.getRole()));
+           roleEntity.setTitle(user.getTitle());
+           roleEntity.setDescription(user.getDescription());
+
            UserEntity userEntity = new UserEntity();
            userEntity.setDni(user.getDni());
            userEntity.setUsername(user.getUsername());
@@ -72,7 +96,7 @@ public class UserService {
            userEntity.setPhone(user.getPhone());
            userEntity.setMail(user.getMail());
            userEntity.setBirth(user.getBirth());
-           userEntity.setRole(user.getIdRole());
+           userEntity.setRoleEntity(roleEntity);
 
            userRepository.save(userEntity);
            return "Usuario actualizado";

@@ -1,5 +1,5 @@
 package cl.practica.desafio.mymarket.service;
-
+// LOS SERVICES PERTENECEN AL PATRON DE DISENO FACADE
 import cl.practica.desafio.mymarket.database.ProductRepository;
 import cl.practica.desafio.mymarket.domain.ProductDTO;
 import cl.practica.desafio.mymarket.entity.ProductEntity;
@@ -43,7 +43,6 @@ public class ProductService {
 
         productRepository.save(productEntity);
         return "Producto insertado";
-
     }
 
     public String updateProduct(ProductDTO product) {
