@@ -4,7 +4,6 @@ import cl.practica.desafio.mymarket.converters.ProductDTOToProductEntity;
 import cl.practica.desafio.mymarket.converters.ProductEntityToProductDTO;
 import cl.practica.desafio.mymarket.database.ProductRepository;
 import cl.practica.desafio.mymarket.domain.ProductDTO;
-import cl.practica.desafio.mymarket.entity.ProductEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
