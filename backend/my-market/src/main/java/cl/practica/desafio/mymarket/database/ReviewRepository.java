@@ -1,11 +1,10 @@
 package cl.practica.desafio.mymarket.database;
 
 
-import cl.practica.desafio.mymarket.entity.UserEntity;
+import cl.practica.desafio.mymarket.entity.ReviewEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<UserEntity, String> {
-
+public interface ReviewRepository extends CrudRepository<ReviewEntity, Integer> {
 }
