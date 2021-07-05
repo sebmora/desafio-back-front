@@ -2,10 +2,7 @@ package cl.practica.desafio.mymarket.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -17,33 +14,35 @@ public class UserEntity {
     }
 
     @Id
-    @Column(name = "dni", nullable = false)
+    @Column(name = "dni")
     private String dni;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username")
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "lastname", nullable = false)
+    @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone")
     private int phone;
 
-    @Column(name = "mail", nullable = false)
+    @Column(name = "mail")
     private String mail;
 
-    @Column(name = "birth", nullable = false)
+    @Column(name = "birth")
     private Date birth;
 
-    @Column(name = "id_role", nullable = false)
-    private int role;
+    @OneToOne
+    @JoinColumn(name = "id_role")
+    private RoleEntity roleEntity;
+
 }
