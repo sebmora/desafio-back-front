@@ -1,7 +1,6 @@
 package cl.practica.desafio.mymarket.entity;
 
 import lombok.Data;
-import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Builder
@@ -15,7 +14,7 @@ public class UserDTO {
     private String name;
     private String lastname;
     private String address;
-    private int phone;
+    private Integer phone;
     private String mail;
     private Date birth;
     private String role;

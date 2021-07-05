@@ -51,30 +51,33 @@ public class UserService {
     }
 
     public String createUser(UserDTO user) {
+        if (userRepository.existsById(user.getDni())) {
+            return "El usuario ya existe";
+        } else {
+            // Composicion de obj. (Crear un objeto dentro de otro)
+            RoleEntity roleEntity = new RoleEntity();
+            roleEntity.setRoleId(Integer.valueOf(user.getRole()));
+            roleEntity.setTitle(user.getTitle());
+            roleEntity.setDescription(user.getDescription());
+            System.out.println("Datos almacenados del rol " + roleEntity);
 
-        // Composicion de obj. (Crear un objeto dentro de otro)
-        RoleEntity roleEntity = new RoleEntity();
-        roleEntity.setRoleId(Integer.valueOf(user.getRole()));
-        roleEntity.setTitle(user.getTitle());
-        roleEntity.setDescription(user.getDescription());
-        System.out.println("Datos almacenados del rol " + roleEntity);
+            log.info("Insertando el dato " + user);
 
-        log.info("Insertando el dato " + user);
+            UserEntity userEntity = new UserEntity();
+            userEntity.setDni(user.getDni());
+            userEntity.setUsername(user.getUsername());
+            userEntity.setPassword(user.getPassword());
+            userEntity.setName(user.getName());
+            userEntity.setLastname(user.getLastname());
+            userEntity.setAddress(user.getAddress());
+            userEntity.setPhone(user.getPhone());
+            userEntity.setMail(user.getMail());
+            userEntity.setBirth(user.getBirth());
+            userEntity.setRoleEntity(roleEntity);
 
-        UserEntity userEntity = new UserEntity();
-        userEntity.setDni(user.getDni());
-        userEntity.setUsername(user.getUsername());
-        userEntity.setPassword(user.getPassword());
-        userEntity.setName(user.getName());
-        userEntity.setLastname(user.getLastname());
-        userEntity.setAddress(user.getAddress());
-        userEntity.setPhone(user.getPhone());
-        userEntity.setMail(user.getMail());
-        userEntity.setBirth(user.getBirth());
-        userEntity.setRoleEntity(roleEntity);
-
-        userRepository.save(userEntity);
-        return "Usuario insertado";
+            userRepository.save(userEntity);
+            return "Usuario insertado";
+        }
     }
 
     public String updateUser(UserDTO user) {

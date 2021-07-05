@@ -27,6 +27,6 @@ public class RoleController {
     public String updateRole(@RequestBody RoleDTO role) { return roleService.updateRole(role); }
 
     // DELETE
-    @RequestMapping(method = RequestMethod.DELETE)
-    public String deleteRole(@RequestBody Integer role) { return roleService.deleteRole(role); }
+    @RequestMapping(method = RequestMethod.DELETE,value = "/{idRole}")
+    public String deleteRole(@PathVariable("idRole") Integer role) { return roleService.deleteRole(role); }
 }
