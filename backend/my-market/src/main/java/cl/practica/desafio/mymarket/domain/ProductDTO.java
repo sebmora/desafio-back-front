@@ -12,5 +12,6 @@ public class ProductDTO {
     private String productName;
     private int price;
     private String description;
+    private int quantity;
     private List<ReviewDTO> reviewDTOList;
 }

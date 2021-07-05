@@ -1,8 +1,9 @@
 package cl.practica.desafio.mymarket.service;
 
+import cl.practica.desafio.mymarket.converters.ProductDTOToProductEntity;
+import cl.practica.desafio.mymarket.converters.ProductEntityToProductDTO;
 import cl.practica.desafio.mymarket.database.ProductRepository;
 import cl.practica.desafio.mymarket.domain.ProductDTO;
-import cl.practica.desafio.mymarket.domain.ReviewDTO;
 import cl.practica.desafio.mymarket.entity.ProductEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -18,58 +18,34 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
+    //Llamamos al converter
+    @Autowired
+    private ProductEntityToProductDTO productEntityToProductDTO;
+    @Autowired
+    private ProductDTOToProductEntity productDTOToProductEntity;
     public List<ProductDTO> getProduct() {
         List<ProductDTO> resultado = new ArrayList<>();
 
-        productRepository.findAll().forEach(productEntity -> {
-            List<ReviewDTO> resultadoReview = productEntity.getReviewList().stream().map(
-                    reviewEntity -> ReviewDTO.builder()
-                        .reviewId(reviewEntity.getReviewId())
-                        .subject(reviewEntity.getSubject())
-                        .description(reviewEntity.getDescription())
-                        .date(reviewEntity.getDate())
-                        .score(reviewEntity.getScore())
-                        .productId(reviewEntity.getProductEntity().getProductId())    
-                        .build()
-            ).collect(Collectors.toList());
-            resultado.add(
-                    ProductDTO.builder()
-                            .productId(productEntity.getProductId())
-                            .productName(productEntity.getProductName())
-                            .price(productEntity.getPrice())
-                            .description(productEntity.getDescription())
-                            .reviewDTOList(resultadoReview)
-                            .build()
-            );
-        });
+        productRepository.findAll().forEach(productEntity ->
+                resultado.add(productEntityToProductDTO.convert(productEntity)));
         return resultado ;
     }
 
+    //Desacoplar
     public String createProduct(ProductDTO product) {
-
         log.info("Insertando el producto" + product);
-
-        ProductEntity productEntity = new ProductEntity();
-        productEntity.setProductId(product.getProductId());
-        productEntity.setProductName(product.getProductName());
-        productEntity.setPrice(product.getPrice());
-        productEntity.setDescription(product.getDescription());
-
-        productRepository.save(productEntity);
-        return "Producto insertado";
-
+        if (productRepository.findById(product.getProductId()).isPresent()){
+            return "Este ID de producto ya existe";
+        }
+        else{
+            productRepository.save(productDTOToProductEntity.convert(product));
+            return "Producto insertado";
+        }
     }
 
     public String updateProduct(ProductDTO product) {
         if (productRepository.findById(product.getProductId()).isPresent()){
-            ProductEntity productEntity = new ProductEntity();
-            productEntity.setProductId(product.getProductId());
-            productEntity.setProductName(product.getProductName());
-            productEntity.setPrice(product.getPrice());
-            productEntity.setDescription(product.getDescription());
-
-            productRepository.save(productEntity);
+            productRepository.save(productDTOToProductEntity.convert(product));
             return "Producto actualizado";
         }
         else {

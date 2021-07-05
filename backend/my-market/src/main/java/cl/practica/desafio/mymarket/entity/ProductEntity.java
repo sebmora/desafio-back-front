@@ -26,8 +26,13 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
+    @OneToOne(mappedBy = "productEntity")
+    private StockEntity stockEntity;
+
     @OneToMany(mappedBy = "productEntity")
     private List<ReviewEntity> reviewList;
+
+
 
 }
 
