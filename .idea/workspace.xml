@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e4a5ef4-6c0a-40a2-8a28-cfd9e075344c" name="Default Changelist" comment="" />
+    <list default="true" id="77cba6a7-6e3d-42ee-b2f1-899aa73b3aef" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,18 +16,6 @@
     <projectState path="$PROJECT_DIR$/backend/my-market">
       <ProjectState />
     </projectState>
-  </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1uP104OQDr6GgdKdGFSL4WftmE0" />
+  <component name="ProjectId" id="1v2qhVaCqVA93HCmIOTAtdU8SBk" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -54,12 +44,6 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Marcelo\Desktop\TBK\LEARNING BACKEND\TocandoBD\desafio-back-front\backend\my-market\src\main\resources\scripts" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
@@ -73,30 +57,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyMarketApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+    <configuration name="MyMarketApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="my-market.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="cl.practica.desafio.mymarket.MyMarketApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Spring Boot.MyMarketApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4e4a5ef4-6c0a-40a2-8a28-cfd9e075344c" name="Default Changelist" comment="" />
-      <created>1624552184293</created>
+      <changelist id="77cba6a7-6e3d-42ee-b2f1-899aa73b3aef" name="Default Changelist" comment="" />
+      <created>1625770655473</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1624552184293</updated>
-      <workItem from="1624552186529" duration="20783000" />
-      <workItem from="1624994318764" duration="1134000" />
-      <workItem from="1624995538648" duration="4441000" />
+      <updated>1625770655473</updated>
+      <workItem from="1625770661324" duration="2135000" />
     </task>
     <servers />
   </component>
@@ -104,15 +81,6 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
