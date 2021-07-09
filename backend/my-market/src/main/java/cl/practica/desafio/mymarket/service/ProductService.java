@@ -3,7 +3,10 @@ package cl.practica.desafio.mymarket.service;
 import cl.practica.desafio.mymarket.converters.ProductDTOToProductEntity;
 import cl.practica.desafio.mymarket.converters.ProductEntityToProductDTO;
 import cl.practica.desafio.mymarket.database.ProductRepository;
+import cl.practica.desafio.mymarket.database.StockRepository;
 import cl.practica.desafio.mymarket.domain.ProductDTO;
+import cl.practica.desafio.mymarket.entity.ProductEntity;
+import cl.practica.desafio.mymarket.entity.StockEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +23,9 @@ public class ProductService {
     //Llamamos al converter
     @Autowired
     private ProductEntityToProductDTO productEntityToProductDTO;
+
+    @Autowired
+    private StockRepository stockRepository;
     @Autowired
     private ProductDTOToProductEntity productDTOToProductEntity;
     public List<ProductDTO> getProduct() {
@@ -37,7 +43,11 @@ public class ProductService {
             return "Este ID de producto ya existe";
         }
         else{
-            productRepository.save(productDTOToProductEntity.convert(product));
+            ProductEntity productEntity = productRepository.save(productDTOToProductEntity.convert(product));
+            StockEntity stockEntity = new StockEntity();
+            stockEntity.setQuantity(product.getQuantity());
+            stockEntity.setProductEntity(productEntity);
+            stockRepository.save(stockEntity);
             return "Producto insertado";
         }
     }

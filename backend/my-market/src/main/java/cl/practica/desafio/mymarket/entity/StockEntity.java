@@ -8,11 +8,12 @@ import javax.persistence.Table;
 
 @Data
 @Entity
+@SequenceGenerator(name = "stock_id_seq")
 @Table(name = "stock", schema = "public")
 public class StockEntity {
 
     public StockEntity(){}
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "stock_id", nullable = false)
     private int stockId;
